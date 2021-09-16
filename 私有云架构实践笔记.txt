@@ -1,0 +1,346 @@
+容器Container
+LXC=Linux Container
+实例 Instance
+进程是应用程序的组成部分
+
+容器：
+什么是容器：
+  容器类似于一个轻量级的沙箱，利用容器来运行和隔离运用。容器是从镜像创建的应用运行实例，可以将其启动、开始、停止、删除，而这些容器都是彼此相互下隔离的，互不可见的。
+
+跨平台--苹果和安卓
+
+容器的作用：
+  容器可以使应用程序在任何环境下以相同的方式运行
+
+容器的组成：
+1.应用程序本身，（程序是代码片段）
+2.依赖（指运行时环境：Runtime Environment 简称RunEnv）
+例如：应用程序需要的的库或者其他软件
+
+程序：指Program，程序是代码片段
+事务：指程序设计中的事务
+
+程序和运行时环境：
+  程序是提供功能实现的，运行时环境为程序运行提供必要的支持，二者相辅相成，分不开的
+
+
+
+进程是什么？
+  进程是存放运行者的程序状态的一个抽象概念，进程包含内存、各种数据结构和数据实例体，通过使用数据结构存放进程的状态的信息，一般进程隔离有自己的隔离空间以及通过权限进行隔离
+  进程隔离 ：内存空间隔离和权限限制隔离
+
+虚拟机的组成部分：
+第一层：物理硬件层，硬件资源。如：CPU、硬盘、内存等。
+第二层：宿主机操作系统Host os，可以是任何类型的，但必须被硬件所支持
+第三层：超级监视器，用来实现 虚拟化硬件资源？，必须被宿主机操所系统所支持区别在于第三层上，
+第四层：客户机os层，复刻完整的os层，Guest os必须被超级监视器所支持
+第五层：实现特定功能的
+
+容器的组成部分：
+第一层：物理硬件层 CPU 内存
+第二层：宿主机操作系统层Host os ，必须被硬件所支持
+取决于容器所能支持的操作系统
+第三层：容器隐形层？实现容器与操作系统的交互
+第四层：运行某个程序的，提供依赖，借助宿主机操作系统来完成
+第五层：程序层 Progrom，实现某一个单一的功能
+
+容器与虚拟机的区别：
+相同点：两者都是为应用提供封装和隔离
+不同点：①容器在主机操作系统的用户空间中运行，与操作系统的其它进程隔离②传统的虚拟化技术(如：VMWare、Xen等)，会创建完整的虚拟机，要运行应用程序，除了部署应用和依赖以外，还要安装整个操作系统
+
+
+
+容器解决的问题：
+  容器是软件具备了强大的移植能力
+展示层：展示了应用层绘制的数据
+应用层：处理业务需求的业务逻辑
+   业务逻辑：实现一个功能的代码
+数据层：数据存储、读写服务，必须是经过格式化的数据
+  格式化的数据：以固定的或约定的格式存放的数据
+
+集装箱思想：任何货物都分类放到各自的集装箱中，集装箱在整个运输过程中都是密封的，只有到达最终目的地才被打开
+
+Docker容器技术将集装箱的思想运用到软件打包上，为代码提了另一个基于容器的标准化运输系统
+
+绿色软件(便携式软件)：Protable Software
+
+集装箱与Docker的特性对比：
+1.集装箱的特性：
+打包对象：所有货物 
+硬件依赖：使用标准形状允许集装箱装卸到各种交通工具,运输过程中无须开箱  
+隔离性：集装箱可以重叠起来一起运输，这样的话地瓜就不会被压烂了。
+自动化：标准接口使集装箱很容易自动装载和移动。
+高效性：无须开箱,可在各种交通工具间快速搬运。
+职责分工：货主只需考虑把什么货物放在集装箱里;承运方只需关心怎样运输集装箱
+
+2.Docker的特性：
+打包对象：所有软件及其依赖
+硬件依赖：无须修改可运行在虚拟机、公有云、 私有云上
+隔离性：网络、资源、库都是相对隔离的，不会出现依赖问题。
+自动化：提供run、start、 stop等操作,适合自动化
+高效性：轻量级,能够快速启动和迁移。
+职责分工：开发人员只需考虑怎么写代码;运维人员只需关心配置基础环境。
+
+容器技术的优势：
+  对于开发人员：容器有着隔离性和可复用性，开发人员只需为应用创建一次运行环境，之后打包成容器就可以在其他环境下运行。同时容器和所在的主机环境是隔离的，就和虚拟机一样，但是更快更方便。
+  对于系统运维人员：运维人员只需配置好标准环境，服务器就可以运行任何容器。
+
+docker是什么：
+1、docker是一个开源的应用容器引擎，使用Go语言实现
+2、Docker 重新定义了程序开发测试、交付和部署过程，提出了“构建一次，到处运行”的理念，使开发、测试、部署和分发变得更加高效和容易。
+3、Docker 技术使开发者打包应用以及依赖包到一个可移植的容器中，容器可以发布到各种Linux服务器上运行,可以解决开发环境与运维环境Linux版本不一致的问题。
+4、Docker是一种轻量级的操作系统虚拟化的解决方案，Docker的基础是Linux容器技术，Docker在Linux容器技术之上进一步进行了封装，让用户不需要关心容器的管理，使得操作更为简便。Docker支持Ubuntu.CentOS、Debian、 Fedora等主流的Linux操作系统。
+总之、Docker可以将任何应用及其依赖打包成一个轻量级、可移值、自包含的容器，使应用之间相互隔离，共享系统内核和资源。Docker本身不是容器，Docker只是管理容器的引擎。
+
+Docker Engine的服务组成：
+①服务器端Docker进程（Server Docker Daemon）
+②API接口（REST API）
+③Docker客户端命令（Client DockerCLI）
+
+Docker Engine业务架构：
+①docker客户端：docker构建，docker拉取，docker启动
+②Docker主机
+③镜像仓库
+
+Docker的3个基本概念：
+镜像(image)：镜像是一个模板，用于创建容器实例，是静态的存在
+容器(container)：容器是某个镜像的运行实例，是动态的存在
+仓库服务(Registry)：仓库是存储Docker镜像的位置，可以是本地仓库、也可以是远程仓库。Docker Hub是一个由Docker公司提供的公共镜像仓库。
+
+常用的四个命令：
+docker run  创建docker容器，并且启动docker容器
+docker restart +容器ID或容器名  重启容器
+Docker stop+容器ID或容器名 停止处于运行状态的容器
+Docker start+容器ID或容器名 启动处于停止状态的容器
+
+
+
+
+
+
+
+常用命令：
+mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.original
+重命名yum源CentOS-Base.repo 为CentOS-Base.repo.original
+
+wget -O /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
+把从阿里云下载CentOS-7重命名为CentOS-Base.repo
+
+rm -rf /var/run/yum.pid
+删除命令锁
+
+yum clean all
+
+
+rm -rf /var/run/yum.pid
+
+
+yum makecache
+新建yum缓存
+
+rm -rf /var/run/yum.pid
+删除命令行锁
+
+yum -y update
+更新yum数据
+
+rm -rf /var/run/yum.pid
+删除命令行锁
+
+systemctl stop firewalld && systemctl disable firewalld
+关闭操作系统的防火墙
+
+sed -i 's/^SELINUX=.*/SELINUX=disabled/' /etc/selinux/config && setenforce 0
+修改文件config的SELINUX的值为disabled的内容
+
+wget https://mirrors.aliyun.com/epel/epel-release-latest-7.noarch.rpm
+
+
+yum install -y https://mirrors.aliyun.com/epel/epel-release-latest-7.noarch.rpm
+下载epel源的安装包
+
+wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
+更新epel源的，并重命名为epel.repo
+
+sed -i 's|^#baseurl=https://download.fedoraproject.org/pub|baseurl=https://mirrors.aliyun.com|' /etc/yum.repos.d/epel*
+修改epel配置文件,baseurl改为国内的源
+
+sed -i 's|^metalink|#metalink|' /etc/yum.repos.d/epel*
+修改epel源，把metalink 注释掉
+
+yum clean all && yum makecache
+删除yum源缓存并重新缓存？
+
+yum -y update
+更新
+
+yum install -y ntpdate
+下载yum源设置时间
+
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+下载谷歌浏览器的安装包
+
+yum localinstall -y google-chrome-stable_current_x86_64.rpm
+
+
+ntpdate cn.ntp.org.cn
+使用ntpdate同步服务器
+
+yum install -y tree
+工具tree
+
+who | grep用户名 | sed -n '1p' | cut -d' ' -f 1 | sort | uniq
+查找当前用户名
+
+DescriptionUser=$(who | grep 用户名 | sed -n '1p' | cut -d' ' -f 1 | sort | uniq)
+把查询出来的同户名作为值赋给变量DescriptionUser
+
+echo $DescriptionUser
+打印当前用户名
+
+echo "$DescriptionUser  ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+把当前用户名写入配置文件etc/sudoers，  不需要输入密码
+
+init 6
+重启（第六级，即重启）
+
+
+
+今天上课用到的主要命令：
+安装VMwareTools：
+/home/googlebigtable/Downloads/vmware-tools-distrib/vmware-install.pl
+
+初始化CentOS 7 操作系统：
+/home/googlebigtable/Downloads/initCentOS7aliYUM20210331.sh
+
+检查是否安装过docker：
+yum list installed | grep docker
+
+安装docker的依赖工具与驱动程序：
+ yum install -y yum-utils device-mapper-persistent-data lvm2
+
+配置docker的yum安装源：
+ yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+更新docker的yum安装源缓存：
+yum makecache
+
+查看当前可以安装的docker版本：
+yum list docker-ce --showduplicates | sort -r
+
+安装最新版本的docker服务：
+yum install -y docker-ce
+
+启动docker服务：
+systemctl start docker
+systemctl enable docker
+
+验证docker的安装信息：
+docker version
+docker info
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MySQLDockerfile文件：
+
+FROM ubuntu:18.04
+
+MAINTAINER PomanTeng <1807479153@qq.com> <WeChat 1807479153>
+
+# 将sources.list复制到镜像下的/etc/apt/下面，修改镜像源地址
+COPY sources.list /etc/apt/
+# 拷贝SQL文件到home目录下
+COPY eshop.sql /home/
+# 更新apt，因为更换了sources.list，所以比较快，使用官方镜像源在国外，速度比较慢
+RUN apt-get clean && apt-get update
+RUN apt-get -y install apt-utils
+# 安装MySQL
+RUN apt-get -y install mysql-server
+# mysqld.cnf文件中的字符串进行替换
+RUN sed -Ei 's/127.0.0.1/0.0.0.0/' /etc/mysql/mysql.conf.d/mysqld.cnf
+# 修改MySQL，ROOT用户的密码,创建数据库eshop,导入eshop.sql数据文件到数据库
+RUN /etc/init.d/mysql start \
+    && mysql -uroot -e "grant all privileges on *.* to 'root'@'%' identified by '123456';" \
+    && mysql -uroot -e "grant all privileges on *.* to 'root'@'localhost' identified by '123456';" \
+    && mysql -uroot -e "CREATE DATABASE IF NOT EXISTS eshop DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;" \
+    && mysql -uroot -p123456 --default-character-set=utf8 eshop < /home/eshop.sql
+
+EXPOSE 3306 
+
+CMD ["/usr/bin/mysqld_safe"]
+
+
+
+
+
+
+nginx的Dockerfile文件：
+
+FROM centos:7
+MAINTAINER PomanTeng <1807479153@qq.com> <WeChat 1807479153>
+#拷贝本地源到镜像中
+COPY CentOS-Base.repo  /etc/yum.repos.d/
+#安装基础管理命令
+RUN yum install -y gcc gcc-c++ make \
+    openssl-devel pcre-devel gd-devel \
+    iproute net-tools wget && \
+    yum clean all && \
+    rm -rf /var/cache/yum/*
+#下载源码nginx包并编译安装
+RUN wget http://nginx.org/download/nginx-1.15.5.tar.gz && \
+    tar zxf nginx-1.15.5.tar.gz && \
+    cd nginx-1.15.5 &&\
+    ./configure --prefix=/usr/local/nginx \
+    --with-http_ssl_module \
+    --with-http_stub_status_module && \
+    make -j 4 && make install && \
+    rm -rf /usr/local/nginx/html/* && \
+    echo "ok" >> /usr/local/nginx/html/status.html && \
+    cd / && rm -rf nginx-1.12.2* && \
+    ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
+#声明环境变量
+ENV PATH $PATH:/usr/local/nginx/sbin
+#拷贝项目nginx配置
+#COPY nginx.conf /usr/local/nginx/conf/nginx.conf
+#设置工作目录
+WORKDIR /usr/local/nginx
+#指定端口
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+
+
+
+
+
